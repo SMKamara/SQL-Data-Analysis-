@@ -1,0 +1,60 @@
+QUERY 1
+***************************
+
+SELECT COUNT(t.TrackId)Num_Tracks,
+       m.Name AS Media_Type
+FROM Track t
+JOIN MediaType m ON t.MediaTypeId = m.MediaTypeId
+GROUP BY t.MediaTypeId,
+         m.Name
+ORDER BY Num_Tracks DESC;
+
+
+QUERY 2
+********************************
+
+SELECT COUNT(i.InvoiceId)Num_Invoices,
+       l.InvoiceDate,
+       l.BillingCountry
+FROM Invoiceline i
+JOIN Invoice l ON i.InvoiceId = l.InvoiceId
+WHERE l.InvoiceDate BETWEEN '2009-01-01' AND '2009-12-31'
+GROUP BY I.InvoiceId,
+         l.InvoiceDate,
+         l.BillingCountry
+ORDER BY l.InvoiceDate ASC
+LIMIT 5;
+
+
+Query 3
+******************************
+SELECT a.Name,
+       b.Title,
+       AVG(t.Milliseconds)Avg_Length
+FROM Artist a
+JOIN Album b ON a.ArtistId = b.ArtistId
+JOIN Track t ON b.AlbumId = t.AlbumId
+JOIN Genre g ON t.GenreId = g.GenreId
+WHERE g.Name = 'R&B/Soul'
+GROUP BY a.Name,
+         b.Title
+ORDER BY t.Milliseconds ASC;
+
+
+Query 4 
+******************************
+SELECT MIN(i.total)Min_Dollars,
+       q.Company
+FROM INvoice i
+JOIN Customer q ON i.CustomerId = q.CustomerId
+WHERE q.Company IS NOT NULL
+GROUP BY i.total,
+         q.Company
+ORDER BY i.total ASC
+LIMIT 10;
+
+
+
+
+
+
